@@ -52,5 +52,5 @@ module.exports = (app) => {
     RecipeIngredient.deleteAll
   );
 
-  app.use("/travelapi", router);
+  app.use("/recipeapi", router);
 };
