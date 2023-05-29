@@ -17,9 +17,6 @@ module.exports = (app) => {
   // Retrieve a single Recipe with id
   router.get("/recipes/:id", Recipe.findOne);
 
-  // Update a Recipe with id
-  router.put("/recipes/:id", [authenticateRoute], Recipe.update);
-
   // Delete a Recipe with id
   router.delete("/recipes/:id", [authenticateRoute], Recipe.delete);
 
