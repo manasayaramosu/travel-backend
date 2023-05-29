@@ -169,48 +169,49 @@ exports.findAllPublished = (req, res) => {
 };
 
 // Find a single Recipe with an id
-exports.findOne = (req, res) => {
-  const id = req.params.id;
-  Recipe.findAll({
-    where: { id: id },
-    include: [
-      {
-        model: RecipeStep,
-        as: "recipeStep",
-        required: false,
-        include: [
-          {
-            model: RecipeIngredient,
-            as: "recipeIngredient",
-            required: false,
-            include: [
-              {
-                model: Ingredient,
-                as: "ingredient",
-                required: false,
-              },
-            ],
-          },
-        ],
-      },
-    ],
-    order: [[RecipeStep, "stepNumber", "ASC"]],
-  })
-    .then((data) => {
-      if (data) {
-        res.send(data);
-      } else {
-        res.status(404).send({
-          message: `Cannot find Recipe with id=${id}.`,
-        });
-      }
+
+  exports.findOne = (req, res) => {
+    const id = req.params.id;
+    Recipe.findAll({
+      where: { id: id },
+      include: [
+        {
+          model: RecipeStep,
+          as: "recipeStep",
+          required: false,
+          include: [
+            {
+              model: RecipeIngredient,
+              as: "recipeIngredient",
+              required: false,
+              include: [
+                {
+                  model: Ingredient,
+                  as: "ingredient",
+                  required: false,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      order: [[RecipeStep, "stepNumber", "ASC"]],
     })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Error retrieving Recipe with id=" + id,
+      .then((data) => {
+        if (data) {
+          res.send(data);
+        } else {
+          res.status(404).send({
+            message: `Cannot find Recipe with id=${id}.`,
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || "Error retrieving Recipe with id=" + id,
+        });
       });
-    });
-};
+  };
 // Update a Recipe by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
