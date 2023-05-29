@@ -13,8 +13,6 @@ module.exports = (app) => {
     Recipe.findAllForUser
   );
 
-  // Retrieve all published Recipes
-  router.get("/recipes/", Recipe.findAllPublished);
 
   // Retrieve a single Recipe with id
   router.get("/recipes/:id", Recipe.findOne);
