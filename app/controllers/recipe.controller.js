@@ -46,7 +46,7 @@ exports.create = (req, res) => {
     throw error;
   }
 
-  // Create a Recipe
+  // Create a Itinerary 
   const recipe = {
     name: req.body.name,
     description: req.body.description,
@@ -61,7 +61,7 @@ exports.create = (req, res) => {
     touristspots: req.body.touristspots,
 
   };
-  // Save Recipe in the database
+  // Save Recipe in the Itinerary
   Recipe.create(recipe)
     .then((data) => {
       res.send(data);
