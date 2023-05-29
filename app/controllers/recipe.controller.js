@@ -36,7 +36,11 @@ exports.create = (req, res) => {
       const error = new Error("enddate cannot be empty for recipe!");
       error.statusCode = 400;
       throw error;} 
-
+    else if (req.body.isPublished === undefined) {
+        const error = new Error("Is Published cannot be empty for recipe!");
+        error.statusCode = 400;
+        throw error;
+      } 
    else if (req.body.userId === undefined) {
     const error = new Error("User Id cannot be empty for recipe!");
     error.statusCode = 400;
@@ -48,7 +52,7 @@ exports.create = (req, res) => {
     name: req.body.name,
     description: req.body.description,
 								
-						
+		isPublished: req.body.isPublished ? req.body.isPublished : false,			
     userId: req.body.userId,
     location: req.body.location,
     startdate: req.body.startdate,
@@ -118,7 +122,51 @@ exports.findAllForUser = (req, res) => {
     });
 };
 
-
+// Find all Published Recipes
+exports.findAllPublished = (req, res) => {
+  Recipe.findAll({
+    where: { isPublished: true },
+    include: [
+      {
+        model: RecipeStep,
+        as: "recipeStep",
+        required: false,
+        include: [
+          {
+            model: RecipeIngredient,
+            as: "recipeIngredient",
+            required: false,
+            include: [
+              {
+                model: Ingredient,
+                as: "ingredient",
+                required: false,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    order: [
+      ["name", "ASC"],
+      [RecipeStep, "stepNumber", "ASC"],
+    ],
+  })
+    .then((data) => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Cannot find Published Recipes.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Error retrieving Published Recipes.",
+      });
+    });
+};
 // Find a single Recipe with an id
 
   exports.findOne = (req, res) => {

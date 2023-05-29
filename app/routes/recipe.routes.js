@@ -12,6 +12,8 @@ module.exports = (app) => {
     [authenticateRoute],
     Recipe.findAllForUser
   );
+  // Retrieve all published Recipes
+  router.get("/recipes/", Recipe.findAllPublished);
   // Update a Recipe with id
   router.put("/recipes/:id", [authenticateRoute], Recipe.update);
 

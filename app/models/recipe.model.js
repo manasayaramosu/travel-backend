@@ -8,7 +8,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    
+    isPublished: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+    },
 
     location: {
       type: Sequelize.STRING,
