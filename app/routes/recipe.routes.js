@@ -12,9 +12,10 @@ module.exports = (app) => {
     [authenticateRoute],
     Recipe.findAllForUser
   );
+  // Update a Recipe with id
+  router.put("/recipes/:id", [authenticateRoute], Recipe.update);
 
-
-  // Retrieve a single Recipe with id
+  // Retrieve a single Recipe with id 
   router.get("/recipes/:id", Recipe.findOne);
 
   // Delete a Recipe with id
