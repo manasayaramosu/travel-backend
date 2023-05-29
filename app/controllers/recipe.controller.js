@@ -14,16 +14,29 @@ exports.create = (req, res) => {
   } else if (req.body.description === undefined) {
     const error = new Error("Description cannot be empty for recipe!");
     error.statusCode = 400;
-    throw error;
-  } else if (req.body.servings === undefined) {
-    const error = new Error("Servings cannot be empty for recipe!");
-    error.statusCode = 400;
-    throw error;
-  } else if (req.body.time === undefined) {
-    const error = new Error("Time cannot be empty for recipe!");
-    error.statusCode = 400;
-    throw error;
-  } else if (req.body.isPublished === undefined) {
+    throw error;}
+    else if (req.body.location === undefined) {
+      const error = new Error("Location cannot be empty for recipe!");
+      error.statusCode = 400;
+      throw error;}
+    else if (req.body.startdate === undefined) {
+      const error = new Error("startdate cannot be empty for recipe!");
+      error.statusCode = 400;
+      throw error;}
+    else if (req.body.hotels === undefined) {
+      const error = new Error("hotels cannot be empty for recipe!");
+      error.statusCode = 400;
+      throw error;}
+    else if (req.body.touristspots === undefined) {
+      const error = new Error("tourists spot cannot be empty for recipe!");
+      error.statusCode = 400;
+      throw error;}
+      
+    else if (req.body.enddate === undefined) {
+      const error = new Error("enddate cannot be empty for recipe!");
+      error.statusCode = 400;
+      throw error;} 
+   else if (req.body.isPublished === undefined) {
     const error = new Error("Is Published cannot be empty for recipe!");
     error.statusCode = 400;
     throw error;
@@ -37,10 +50,16 @@ exports.create = (req, res) => {
   const recipe = {
     name: req.body.name,
     description: req.body.description,
-    servings: req.body.servings,
-    time: req.body.time,
+								
+						
     isPublished: req.body.isPublished ? req.body.isPublished : false,
     userId: req.body.userId,
+    location: req.body.location,
+    startdate: req.body.startdate,
+    enddate: req.body.enddate,
+    hotels: req.body.hotels,
+    touristspots: req.body.touristspots,
+
   };
   // Save Recipe in the database
   Recipe.create(recipe)
