@@ -1,16 +1,17 @@
 module.exports = (sequelize, Sequelize) => {
   const Ingredient = sequelize.define("ingredient", {
-    name: {
+    Destinations: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    unit: {
+    Touristspots: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    pricePerUnit: {
-      type: Sequelize.DECIMAL(10, 2),
+    Hotels: {
+      type: Sequelize.STRING,
+      allowNull: false,
     },
   });
-  return Ingredient;
+  return Ingredient;
 };
