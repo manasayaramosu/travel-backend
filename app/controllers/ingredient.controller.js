@@ -3,28 +3,22 @@ const Ingredient = db.ingredient;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Ingredient
+// Create and Save a new Ingredient
 exports.create = (req, res) => {
   // Validate request
-  if (req.body.name === undefined) {
-    const error = new Error("Name cannot be empty for ingredient!");
-    error.statusCode = 400;
-    throw error;
-  } else if (req.body.unit === undefined) {
-    const error = new Error("Unit cannot be empty for ingredient!");
-    error.statusCode = 400;
-    throw error;
-  } else if (req.body.pricePerUnit === undefined) {
-    const error = new Error("Price per unit cannot be empty for ingredient!");
-    error.statusCode = 400;
-    throw error;
+  if (!req.body.Destinations || !req.body.Hotels || !req.body.Touristspots) {
+    return res.status(400).send({
+      message: "Destinations, Hotels, and Touristspots are required fields",
+    });
   }
 
-  // Create a Ingredient
+  // Create an Ingredient
   const ingredient = {
-    name: req.body.name,
-    unit: req.body.unit,
-    pricePerUnit: req.body.pricePerUnit,
+    Destinations: req.body.Destinations,
+    Hotels: req.body.Hotels,
+    Touristspots: req.body.Touristspots,
   };
+
   // Save Ingredient in the database
   Ingredient.create(ingredient)
     .then((data) => {
@@ -38,6 +32,7 @@ exports.create = (req, res) => {
     });
 };
 
+
 // Retrieve all Ingredients from the database.
 exports.findAll = (req, res) => {
   const ingredientId = req.query.ingredientId;
@@ -49,7 +44,7 @@ exports.findAll = (req, res) => {
       }
     : null;
 
-  Ingredient.findAll({ where: condition, order: [["name", "ASC"]] })
+  Ingredient.findAll({ where: condition, order: [["Destinations", "ASC"]] })
     .then((data) => {
       res.send(data);
     })
@@ -139,6 +134,6 @@ exports.deleteAll = (req, res) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while removing all ingredients.",
-      });
-    });
+      });
+    });
 };
