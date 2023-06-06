@@ -23,14 +23,14 @@ exports.create = (req, res) => {
       const error = new Error("startdate cannot be empty for recipe!");
       error.statusCode = 400;
       throw error;}
-    else if (req.body.hotels === undefined) {
-      const error = new Error("hotels cannot be empty for recipe!");
-      error.statusCode = 400;
-      throw error;}
-    else if (req.body.touristspots === undefined) {
-      const error = new Error("tourists spot cannot be empty for recipe!");
-      error.statusCode = 400;
-      throw error;}
+    // else if (req.body.hotels === undefined) {
+    //   const error = new Error("hotels cannot be empty for recipe!");
+    //   error.statusCode = 400;
+    //   throw error;}
+    // else if (req.body.touristspots === undefined) {
+    //   const error = new Error("tourists spot cannot be empty for recipe!");
+    //   error.statusCode = 400;
+    //   throw error;}
       
     else if (req.body.enddate === undefined) {
       const error = new Error("enddate cannot be empty for recipe!");
@@ -54,11 +54,11 @@ exports.create = (req, res) => {
 								
 		isPublished: req.body.isPublished ? req.body.isPublished : false,			
     userId: req.body.userId,
-    location: req.body.location,
+    // location: req.body.location,
     startdate: req.body.startdate,
     enddate: req.body.enddate,
-    hotels: req.body.hotels,
-    touristspots: req.body.touristspots,
+    // hotels: req.body.hotels,
+    // touristspots: req.body.touristspots,
 
   };
   // Save Recipe in the Itinerary
