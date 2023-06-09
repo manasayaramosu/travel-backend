@@ -54,7 +54,7 @@ exports.create = (req, res) => {
 								
 		isPublished: req.body.isPublished ? req.body.isPublished : false,			
     userId: req.body.userId,
-    // location: req.body.location,
+     location: req.body.location,
     startdate: req.body.startdate,
     enddate: req.body.enddate,
     // hotels: req.body.hotels,

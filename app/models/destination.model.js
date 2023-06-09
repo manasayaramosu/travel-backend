@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Recipe = sequelize.define("recipe", {
+  const Recipe = sequelize.define("Destinations", {
     name: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -13,10 +13,10 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
     },
 
-    // location: {
-    //   type: Sequelize.STRING,
-    //   allowNull: false,
-    // },
+    location: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
 
     startdate: {
       type: Sequelize.DATE,
