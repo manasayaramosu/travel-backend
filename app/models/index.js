@@ -14,8 +14,8 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.ingredient = require("./ingredient.model.js")(sequelize, Sequelize);
-db.recipe = require("./recipe.model.js")(sequelize, Sequelize);
+db.ingredient = require("./location.model.js")(sequelize, Sequelize);
+db.recipe = require("./destination.model.js")(sequelize, Sequelize);
 db.recipeStep = require("./recipeStep.model.js")(sequelize, Sequelize);
 db.recipeIngredient = require("./recipeIngredient.model.js")(
   sequelize,

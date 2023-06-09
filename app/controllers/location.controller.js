@@ -6,16 +6,16 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Ingredient
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.Destinations || !req.body.Hotels || !req.body.Touristspots) {
+  if (!req.body.Destinations || !req.body.placediscription || !req.body.Touristspots) {
     return res.status(400).send({
-      message: "Destinations, Hotels, and Touristspots are required fields",
+      message: "Destinations, placediscription, and Touristspots are required fields",
     });
   }
 
   // Create an Ingredient
   const ingredient = {
     Destinations: req.body.Destinations,
-    Hotels: req.body.Hotels,
+    placediscription: req.body.placediscription,
     Touristspots: req.body.Touristspots,
   };
 

@@ -1,12 +1,12 @@
 [Unit]
 Description=NodeJS Travel Backend
 After=network.target
- 
+
 [Service]
 Type=simple
 User=ubuntu
 WorkingDirectory=/home/ubuntu/nodeapps/travel-backend/
-ExecStart=/usr/bin/npm run start
+ExecStart=/usr/local/bin/npm run start
 Restart=on-failure
  
 [Install]
