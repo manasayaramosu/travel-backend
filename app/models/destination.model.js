@@ -22,14 +22,6 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.DATE,
       allowNull: false,
     },
-    // hotels: {
-    //   type: Sequelize.STRING,
-    //   allowNull: false,
-    // },
-    // touristspots: {
-    //   type: Sequelize.STRING,
-    //   allowNull: false,
-    // },
     enddate: {
       type: Sequelize.DATE,
       allowNull: false,
