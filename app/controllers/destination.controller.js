@@ -1,4 +1,5 @@
 const db = require("../models");
+const date = require('date-and-time')
 const Recipe = db.recipe;
 const RecipeStep = db.recipeStep;
 const RecipeIngredient = db.recipeIngredient;
@@ -198,7 +199,17 @@ exports.findAllPublished = (req, res) => {
     })
       .then((data) => {
         if (data) {
-          res.send(data);
+          console.log("Rec");
+          retuData=[];
+          for (const obj of data) {  
+            datVal=obj.dataValues;
+            console.log(date.format(datVal.startdate,'YYYY-MM-DD'));
+            datVal.startdate=date.format(datVal.startdate,'YYYY-MM-DD');
+            datVal.enddate=date.format(datVal.enddate,'YYYY-MM-DD');
+            retuData.push(datVal);
+          }
+          console.log(retuData);
+          res.send(retuData);
         } else {
           res.status(404).send({
             message: `Cannot find Recipe with id=${id}.`,
