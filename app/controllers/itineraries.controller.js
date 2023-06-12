@@ -1,7 +1,6 @@
 const db = require("../models");
 const date = require('date-and-time')
 const Recipe = db.recipe;
-const RecipeStep = db.recipeStep;
 const RecipeIngredient = db.recipeIngredient;
 const Ingredient = db.ingredient;
 const Op = db.Sequelize.Op;
@@ -23,16 +22,7 @@ exports.create = (req, res) => {
     else if (req.body.startdate === undefined) {
       const error = new Error("startdate cannot be empty for recipe!");
       error.statusCode = 400;
-      throw error;}
-    // else if (req.body.hotels === undefined) {
-    //   const error = new Error("hotels cannot be empty for recipe!");
-    //   error.statusCode = 400;
-    //   throw error;}
-    // else if (req.body.touristspots === undefined) {
-    //   const error = new Error("tourists spot cannot be empty for recipe!");
-    //   error.statusCode = 400;
-    //   throw error;}
-      
+      throw error;}      
     else if (req.body.enddate === undefined) {
       const error = new Error("enddate cannot be empty for recipe!");
       error.statusCode = 400;
@@ -80,30 +70,8 @@ exports.findAllForUser = (req, res) => {
   const userId = req.params.userId;
   Recipe.findAll({
     where: { userId: userId },
-    include: [
-      {
-        model: RecipeStep,
-        as: "recipeStep",
-        required: false,
-        include: [
-          {
-            model: RecipeIngredient,
-            as: "recipeIngredient",
-            required: false,
-            include: [
-              {
-                model: Ingredient,
-                as: "ingredient",
-                required: false,
-              },
-            ],
-          },
-        ],
-      },
-    ],
     order: [
       ["name", "ASC"],
-      [RecipeStep, "stepNumber", "ASC"],
     ],
   })
     .then((data) => {
@@ -127,30 +95,8 @@ exports.findAllForUser = (req, res) => {
 exports.findAllPublished = (req, res) => {
   Recipe.findAll({
     where: { isPublished: true },
-    include: [
-      {
-        model: RecipeStep,
-        as: "recipeStep",
-        required: false,
-        include: [
-          {
-            model: RecipeIngredient,
-            as: "recipeIngredient",
-            required: false,
-            include: [
-              {
-                model: Ingredient,
-                as: "ingredient",
-                required: false,
-              },
-            ],
-          },
-        ],
-      },
-    ],
     order: [
-      ["name", "ASC"],
-      [RecipeStep, "stepNumber", "ASC"],
+      ["name", "ASC"]
     ],
   })
     .then((data) => {
@@ -173,29 +119,7 @@ exports.findAllPublished = (req, res) => {
   exports.findOne = (req, res) => {
     const id = req.params.id;
     Recipe.findAll({
-      where: { id: id },
-      include: [
-        {
-          model: RecipeStep,
-          as: "recipeStep",
-          required: false,
-          include: [
-            {
-              model: RecipeIngredient,
-              as: "recipeIngredient",
-              required: false,
-              include: [
-                {
-                  model: Ingredient,
-                  as: "ingredient",
-                  required: false,
-                },
-              ],
-            },
-          ],
-        },
-      ],
-      order: [[RecipeStep, "stepNumber", "ASC"]],
+      where: { id: id }
     })
       .then((data) => {
         if (data) {
@@ -280,7 +204,7 @@ exports.deleteAll = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while removing all recipes.",
+          err.message || "Some error occurred while removing all itineraries.",
       });
     });
 };

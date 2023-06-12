@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const RecipeIngredient = sequelize.define("IternLocations", {
+  const RecipeIngredient = sequelize.define("IternHotels", {
     quantity: {
       type: Sequelize.FLOAT,
       allowNull: false,
