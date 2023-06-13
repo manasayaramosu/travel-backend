@@ -2,7 +2,7 @@ const db = require("../models");
 const date = require('date-and-time')
 const Hotel = db.hotels;
 const Op = db.Sequelize.Op;
-// Create and Save a new Recipe
+// Create and Save a new Hotel
 exports.create = (req, res) => {
   // Validate request
   if (req.body.name === undefined) {
